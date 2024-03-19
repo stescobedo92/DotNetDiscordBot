@@ -14,6 +14,13 @@ public class DiscordClientUtilities
         this.client.MessageReceived += MessageHandler;
     }
 
+    /// <summary>
+    /// Starts the Discord bot asynchronously.
+    /// </summary>
+    /// <remarks>
+    /// This method initializes the Discord client, logs in with the provided token, and starts the bot.
+    /// </remarks>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task StartBotAsync()
     {
 
@@ -25,6 +32,11 @@ public class DiscordClientUtilities
         Task LogFuncAsync(LogMessage message) { Console.Write(message.ToString()); return Task.CompletedTask; }
     }
 
+    /// <summary>
+    /// Handles incoming messages received by the bot.
+    /// </summary>
+    /// <param name="message">The message received by the bot.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     private async Task MessageHandler(SocketMessage message)
     {
         if (message.Author.IsBot) return;
@@ -32,5 +44,11 @@ public class DiscordClientUtilities
         await ReplyAsync(message, "C# response works!");
     }
 
+    /// <summary>
+    /// Sends a reply message to the channel where the original message was received.
+    /// </summary>
+    /// <param name="message">The original message to reply to.</param>
+    /// <param name="response">The response message to send.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     private async Task ReplyAsync(SocketMessage message, string response) => await message.Channel.SendMessageAsync(response);
 }
